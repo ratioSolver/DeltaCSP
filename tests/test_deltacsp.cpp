@@ -18,6 +18,8 @@ void test0()
     deltacsp::solver s;
     const auto v1 = s.new_sat();
     const auto v2 = s.new_sat();
+    auto c1 = std::make_shared<deltacsp::clause>(std::vector<utils::lit>{{v1, true}, {v2, false}});
+    s.add_constraint(c1);
     LOG_DEBUG(deltacsp::to_string(s));
 }
 

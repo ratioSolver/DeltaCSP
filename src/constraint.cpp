@@ -3,7 +3,7 @@
 
 namespace deltacsp
 {
-    clause::clause(std::vector<utils::lit> lits) noexcept : lits{std::move(lits)} {}
+    clause::clause(std::vector<utils::lit> &&lits) noexcept : lits{std::move(lits)} {}
 
     unsigned int clause::violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept
     {

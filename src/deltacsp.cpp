@@ -24,11 +24,33 @@ namespace deltacsp
         return x;
     }
 
+    void solver::add_constraint(const std::shared_ptr<constraint> &c) noexcept { constraints.insert(c); }
+
+    void solver::remove_constraint(const std::shared_ptr<constraint> &c) noexcept { constraints.erase(c); }
+
+    std::map<utils::var, const utils::enum_val &> solver::get_current_assignment() const noexcept
+    {
+        std::map<utils::var, const utils::enum_val &> assignment;
+        for (size_t i = 0; i < vars.size(); ++i)
+            if (vars[i].value != nullptr)
+                assignment.emplace(i, *vars[i].value);
+        return assignment;
+    }
+
     std::string to_string(const solver &s) noexcept
     {
         std::string res;
         for (size_t i = 0; i < s.vars.size(); ++i)
             res += "v" + std::to_string(i) + to_string(s.vars[i]) + "\n";
+
+        std::map<utils::var, const utils::enum_val &> assignment = s.get_current_assignment();
+        for (const auto &c : s.constraints)
+        {
+            res += c->to_string();
+            auto vios = c->violations(assignment);
+            if (vios > 0)
+                res += " (" + std::to_string(vios) + ")";
+        }
         return res;
     }
 } // namespace deltacsp

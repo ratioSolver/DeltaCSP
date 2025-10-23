@@ -20,7 +20,7 @@ namespace deltacsp
   class clause final : public constraint
   {
   public:
-    clause(std::vector<utils::lit> lits) noexcept;
+    clause(std::vector<utils::lit> &&lits) noexcept;
 
     unsigned int violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept override;
 

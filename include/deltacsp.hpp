@@ -5,6 +5,8 @@
 #include <vector>
 #include <functional>
 #include <optional>
+#include <unordered_set>
+#include <memory>
 
 namespace deltacsp
 {
@@ -38,10 +40,17 @@ namespace deltacsp
     [[nodiscard]] utils::var new_sat(std::optional<bool> initial_value = std::nullopt) noexcept;
     [[nodiscard]] utils::var new_var(const std::vector<std::reference_wrapper<const utils::enum_val>> &domain, std::optional<const utils::enum_val> initial_value = std::nullopt) noexcept;
 
+    void add_constraint(const std::shared_ptr<constraint> &c) noexcept;
+    void remove_constraint(const std::shared_ptr<constraint> &c) noexcept;
+
     friend std::string to_string(const solver &s) noexcept;
 
   private:
-    std::vector<var> vars; // index is the variable id
+    std::map<utils::var, const utils::enum_val &> get_current_assignment() const noexcept;
+
+  private:
+    std::vector<var> vars;                                       // index is the variable id
+    std::unordered_set<std::shared_ptr<constraint>> constraints; // all constraints in the solver
   };
 
   [[nodiscard]] std::string to_string(const solver &s) noexcept;
