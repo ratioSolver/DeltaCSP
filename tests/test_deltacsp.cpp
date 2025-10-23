@@ -18,6 +18,7 @@ void test0()
     deltacsp::solver s;
     const auto v1 = s.new_sat();
     const auto v2 = s.new_sat();
+    LOG_DEBUG(deltacsp::to_string(s));
 }
 
 int main()

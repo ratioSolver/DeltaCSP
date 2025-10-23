@@ -13,6 +13,8 @@ namespace deltacsp
     virtual ~constraint() = default;
 
     virtual unsigned int violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept = 0;
+
+    virtual std::string to_string() const noexcept = 0;
   };
 
   class clause final : public constraint
@@ -21,6 +23,8 @@ namespace deltacsp
     clause(std::vector<utils::lit> lits) noexcept;
 
     unsigned int violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept override;
+
+    std::string to_string() const noexcept override;
 
   private:
     std::vector<utils::lit> lits;
@@ -33,6 +37,8 @@ namespace deltacsp
 
     unsigned int violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept override;
 
+    std::string to_string() const noexcept override;
+
   private:
     utils::var var1;
     utils::var var2;
@@ -44,6 +50,8 @@ namespace deltacsp
     neq(utils::var var1, utils::var var2) noexcept;
 
     unsigned int violations(const std::map<utils::var, const utils::enum_val &> &assignment) const noexcept override;
+
+    std::string to_string() const noexcept override;
 
   private:
     utils::var var1;
