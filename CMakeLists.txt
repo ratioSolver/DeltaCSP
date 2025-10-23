@@ -4,7 +4,7 @@ project(DeltaCSP VERSION 0.2.0 LANGUAGES CXX)
 include(CTest)
 enable_testing()
 
-add_library(DeltaCSP src/deltacsp.cpp src/var.cpp)
+add_library(DeltaCSP src/deltacsp.cpp src/var.cpp src/constraint.cpp)
 target_compile_features(DeltaCSP PUBLIC cxx_std_17)
 target_include_directories(DeltaCSP PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>)
 if(NOT TARGET json)

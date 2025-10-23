@@ -16,11 +16,8 @@ private:
 void test0()
 {
     deltacsp::solver s;
-    test_enum_val ev1("A");
-    test_enum_val ev2("B");
-    test_enum_val ev3("C");
-    auto var1 = s.new_var({ev1, ev2});
-    auto var2 = s.new_var({ev2, ev3});
+    const auto v1 = s.new_sat();
+    const auto v2 = s.new_sat();
 }
 
 int main()

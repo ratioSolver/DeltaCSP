@@ -10,7 +10,7 @@ namespace deltacsp
     friend class solver;
 
   public:
-    var(const std::unordered_set<const utils::enum_val *> &domain, const utils::enum_val *initial_value = nullptr) noexcept;
+    var(const std::unordered_set<const utils::enum_val *> &&dom, const utils::enum_val *init_v = nullptr) noexcept;
 
   private:
     std::unordered_set<const utils::enum_val *> domain;
